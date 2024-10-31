@@ -36,12 +36,8 @@ Copy the `.github/` folder from the `templates/nextjs/` folder to the root direc
 
 **About environment variables**
 
-In Next.js CI/CD, [natterstefan/action-next-env@v1](https://github.com/marketplace/actions/next-env) is used to load local `.env.* `files.
-
-Since we typically use `.env.development` and `.env.production` to differentiate between environments, and this plugin requires an `.env` file, we need to add an empty `.env` file.
-This way, it can correctly load `.env.development` and `.env.production`.
-
 In Next.js, we typically use the `NEXT_PUBLIC_ENV` environment variable to differentiate environments. Therefore, you need to add `NEXT_PUBLIC_ENV=dev` in `.env.development` and `NEXT_PUBLIC_ENV=prod` in `.env.production` to distinguish between environments.
+
 If needed, feel free to modify the environment variable name, and don't forget to update `NEXT_PUBLIC_ENV` in the `.yaml` file in the workflows.
 
 For sensitive or rarely modified environment variables, it is recommended to add them directly in the project settings on Vercel so that all team members can access them. Variables that are frequently modified should be added to the local `.env.\*` files.
