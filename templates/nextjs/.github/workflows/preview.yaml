@@ -31,7 +31,7 @@ jobs:
         with:
           version: 9
 
-      - name: Install Vercel CLI
+      - name: Install vercel CLI
         run: pnpm add -g vercel@latest
 
       - name: Pull vercel environment information
