@@ -1,0 +1,38 @@
+{
+  "name": "@ce1ling/create-vercel-cicd",
+  "version": "1.0.0",
+  "description": "GitHub Actions CI/CD for Vercel.",
+  "main": "dist/index.js",
+  "bin": {
+    "create-vercel-cicd": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc --skipLibCheck src/index.ts --outDir dist",
+    "release": "npm run build && npm publish --access public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ce1ling/create-vercel-cicd"
+  },
+  "bugs": {
+    "url": "https://github.com/ce1ling/create-vercel-cicd/issues"
+  },
+  "author": "Ce1ling",
+  "license": "MIT",
+  "keywords": [
+    "CI/CD",
+    "Vercel",
+    "Next.js"
+  ],
+  "devDependencies": {
+    "@types/node": "^20",
+    "inquirer": "^12.0.1",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
