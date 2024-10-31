@@ -3,6 +3,7 @@ name: Vercel Preview Deployment
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
 on:
   push:
@@ -35,13 +36,13 @@ jobs:
         run: pnpm add -g vercel@latest
 
       - name: Pull vercel environment information
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=preview --token=${{ env.VERCEL_TOKEN }}
 
       - name: Build project artifacts
-        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel build --token=${{ env.VERCEL_TOKEN }}
 
       - name: Deploy project artifacts to vercel
         run: |
           vercel deploy --prebuilt \
             --env NEXT_PUBLIC_ENV=${{ env.NEXT_PUBLIC_ENV }} \
-            --token=${{ secrets.VERCEL_TOKEN }}
+            --token=${{ env.VERCEL_TOKEN }}
