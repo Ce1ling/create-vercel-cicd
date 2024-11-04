@@ -1,0 +1,49 @@
+name: Vercel Production Deployment
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Deploy-Production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4.0.0
+        with:
+          version: 9
+
+      - name: Load local env
+        uses: xom9ikk/dotenv@v2.3.0
+        with:
+          path: ./
+          mode: production
+          load-mode: strict
+
+      - name: Install vercel CLI
+        run: pnpm add -g vercel@latest
+
+      - name: Pull vercel environment information
+        run: vercel pull --yes --environment=production --token=${{ env.VERCEL_TOKEN }}
+
+      - name: Build project artifacts
+        run: vercel build --prod --token=${{ env.VERCEL_TOKEN }}
+
+      - name: Deploy project artifacts to vercel
+        run: |
+          vercel deploy --prebuilt --prod \
+            --env NEXT_PUBLIC_ENV=${{ env.NEXT_PUBLIC_ENV }} \
+            --token=${{ env.VERCEL_TOKEN }}
