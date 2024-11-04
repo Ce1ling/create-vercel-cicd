@@ -1,6 +1,6 @@
 {
   "name": "@ce1ling/create-vercel-cicd",
-  "version": "1.0.2",
+  "version": "1.1.2",
   "description": "GitHub Actions CI/CD for Vercel.",
   "main": "dist/index.js",
   "bin": {
