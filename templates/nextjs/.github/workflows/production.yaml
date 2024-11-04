@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: 20
 
-      - name: Load .env file
+      - name: Load local env file
         uses: natterstefan/action-next-env@v1
         with:
           path: ./
