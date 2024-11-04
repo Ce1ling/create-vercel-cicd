@@ -7,7 +7,10 @@ import { copyDirectory } from './utils'
 
 const templateDir = join(__dirname, '../templates')
 
-const choices = [{ name: 'Next.js', value: 'nextjs' }] as const
+const choices = [
+  { name: 'Next.js', value: 'nextjs' },
+  { name: 'Vite', value: 'vite' },
+] as const
 
 const main = async () => {
   const { selected }: { selected: (typeof choices)[number]['value'] } =
@@ -19,13 +22,9 @@ const main = async () => {
         choices,
       },
     ])
-  const sourceDir = join(templateDir, selected)
+  if (!selected) throw new Error(`"${selected}" is not implemented`)
 
-  if (selected === 'nextjs') {
-    copyDirectory(sourceDir, process.cwd())
-  } else {
-    throw new Error(`"${selected}" is not implemented`)
-  }
+  copyDirectory(join(templateDir, selected), process.cwd())
 }
 
 main()
