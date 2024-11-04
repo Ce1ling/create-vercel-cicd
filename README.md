@@ -9,6 +9,7 @@ Therefore, this is a compatible deployment solution rather than a disruptive one
 ## Current supported frameworks
 
 - [Next.js](https://nextjs.org/)
+- [Vite](https://vite.dev/)
 
 ## Getting Started
 
@@ -32,15 +33,16 @@ Copy the `.github/` folder from the `templates/nextjs/` folder to the root direc
 
 ## Notes
 
-### Next.js
-
 **About environment variables**
 
-In Next.js, we typically use the `NEXT_PUBLIC_ENV` environment variable to differentiate environments. Therefore, you need to add `NEXT_PUBLIC_ENV=dev` in `.env.development` and `NEXT_PUBLIC_ENV=prod` in `.env.production` to distinguish between environments.
+We typically use `.env.development` and `.env.production` files to differentiate environments, and manually switch environments for testing purposes. So please add environment variables in these two files (if they don't exist, create them) based on the framework:
 
-If needed, feel free to modify the environment variable name, and don't forget to update `NEXT_PUBLIC_ENV` in the `.yaml` file in the workflows.
+- Next.js: `NEXT_PUBLIC_ENV=<prod | dev>`
+- Vite: `VITE_ENV=<prod | dev>`
 
-For sensitive or rarely modified environment variables, it is recommended to add them directly in the project settings on Vercel so that all team members can access them. Variables that are frequently modified should be added to the local `.env.\*` files.
+If needed, feel free to modify these variable names, but don't forget to update the `.yaml` file.
+
+For sensitive or rarely modified environment variables, it is recommended to add them directly in the project settings on Vercel so that all team members can access them. Variables that are frequently modified should be added to the local `.env.*` files.
 
 ## Reference
 
